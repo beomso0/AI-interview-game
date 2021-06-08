@@ -8,16 +8,11 @@ html, body  {
   display: block;
 }
 
-#video {
+.ai {
   position: absolute;
   pointer-events: none;
-  display:none; 
-}
-
-#drawing {
-  position: absolute;
-  pointer-events: none;
-  display: none;  
+  display:none;
+  box-shadow: 1px 1px 10px #666;
 }
 
 #main_video {
@@ -27,6 +22,8 @@ html, body  {
   top:50%;
   transform: translate(7%, -50%);
   border-radius: 15px;
+  
+  box-shadow: 0 0 10px #666;
   /* box-shadow:1px 1px 1px 1px rgb(25, 25, 25); */
   /* left:130px;
   top: 130px; */

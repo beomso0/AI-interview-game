@@ -1,6 +1,4 @@
-let finalResult = "";
-
-colorsForEmotion = {
+let colorsForEmotion = {
     neutral: 'rgb(99, 110, 114)',
     happy: 'rgb(255, 234, 167)',
     sad: 'rgb(9, 132, 227)',
@@ -19,16 +17,6 @@ function drawSection() {
     line(width - video.width-5,0,width-video.width-5, height);
     line(width - video.width-5, video.height-2, width, video.height-2);
     line(width - video.width-5, video.height + 140, width, video.height + 140);
-    pop();
-}
-
-function showScore() {
-    push();
-    textAlign(CENTER);
-
-    if(maxEmotion == 'unknown') {        
-        ttext("얼굴을 화면에 잘 인식시켜 주세요!", width - (video.width/2), 0.5* (height + video.height));
-    }  
     pop();
 }
 
@@ -69,7 +57,7 @@ function drawChart() {
 
 class Tester {
     constructor() {
-        this.testTime = [0,39,52,69,96,114]; //type:array [s1,s2, s3]
+        this.testTime = [38,52,69,96,114]; //type:array [s1,s2, s3]
         this.duration = 5; 
         // this.answers =  //type:array ex) ['neutral', 'happy', 'surprised' ...]
         this.stage = 0;
@@ -89,6 +77,7 @@ class Tester {
             stage4: [1],
             stage5: [0,3]
         }
+        this.finalResult = "";
     }
 
     doTest () {
@@ -110,7 +99,9 @@ class Tester {
                      
             if(videotest.time() > this.testTime[this.stage]+this.duration) {
                 this.nowTest = false;
-                this.stage++;
+                if(this.stage != 5) {
+                    this.stage++;
+                }
             }
         }
     }
@@ -123,9 +114,9 @@ class Tester {
             let maxIndex = values.indexOf(max);
 
             if(this.rightAns[prop].includes(maxIndex) && max/testNum >= this.criterion) {
-                finalResult += "o";
+                this.finalResult += "o";
             } else {
-                finalResult += "x";
+                this.finalResult += "x";
             }
         }
     }

@@ -29,6 +29,15 @@ function startVideo() {
   )
 }
 
+function stopVideo() {
+  navigator.mediaDevices.getUserMedia({video: true, audio: false})
+  .then(mediaStream => {
+    const stream = mediaStream;
+    const tracks = stream.getTracks();
+    tracks[0].stop;
+  })
+}
+
 video.addEventListener('play', () => {
   // const canvas = faceapi.createCanvasFromMedia(video)
   // canvas.className = "drawing";
