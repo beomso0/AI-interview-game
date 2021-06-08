@@ -1,0 +1,33 @@
+html, body  {
+  margin: 0;
+  padding: 0;    
+  overflow: hidden;
+}
+
+#defaultCanvas0 {
+  display: block;
+}
+
+#video {
+  position: absolute;
+  pointer-events: none;
+  display:none; 
+}
+
+#drawing {
+  position: absolute;
+  pointer-events: none;
+  display: none;  
+}
+
+#main_video {
+  position: absolute;
+  pointer-events: none;
+  left:0;
+  top:50%;
+  transform: translate(7%, -50%);
+  border-radius: 15px;
+  /* box-shadow:1px 1px 1px 1px rgb(25, 25, 25); */
+  /* left:130px;
+  top: 130px; */
+}
