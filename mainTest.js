@@ -1,12 +1,14 @@
 let colorsForEmotion = {
-    neutral: 'rgb(99, 110, 114)',
-    happy: 'rgb(255, 234, 167)',
-    sad: 'rgb(9, 132, 227)',
-    angry: 'rgb(255, 118, 117)',
-    fearful: 'rgb(225, 112, 85)',
-    disgusted: 'rgb(0, 184, 148)',
-    surprised: 'rgb(162, 155, 254)'
+    무표정: 'rgb(99, 110, 114)',
+    웃음: 'rgb(163, 122, 18)',
+    슬픔: 'rgb(9, 132, 227)',
+    화남: 'rgb(255, 118, 117)',
+    공포: 'rgb(225, 112, 85)',
+    혐오: 'rgb(0, 184, 148)',
+    놀람: 'rgb(162, 155, 254)'
 }
+
+let emotionKo = ["무표정", "웃음", "슬픔", "화남", "공포", "혐오", "놀람"];
 
 function drawSection() {
     push();
@@ -31,7 +33,7 @@ function drawChart() {
     let sero = height - video.height - 170;
     if(nowValues.length != 0) {
         for (let i=0; i<emotions.length; i++) {
-            let nowExp = nowKeys[i];
+            let nowExp = emotionKo[i];
             let nowScore = Math.round(nowValues[i] * 100, 1)
             fill(colorsForEmotion[nowExp]);
             rect(78, 165+(i*sero/emotions.length), (garo-80) * nowScore/100 ,10);
@@ -53,6 +55,10 @@ function drawChart() {
     }
     
     pop();
+}
+
+function drawBar() {
+
 }
 
 class Tester {
