@@ -81,20 +81,26 @@ class p5Operator {
                 canvas.style.cssText= "display:none;"
                 image(bg4,width/2,height/2, width, height);      
                 
-                if(!voice4.isPlaying() && this.soundPlayed) {                    
-                    this.button = 'next';
-                    if(this.hover) {
-                        image(imgNextH, width/2, height/2+60, width/20,width/20);
-                    } else {
-                        image(imgNext, width/2, height/2+60, width/20,width/20);
-                    }
-                } else {                
-                    image(imgLoading, width/2, height/2+60, 100,100);
+                // if(!voice4.isPlaying() && this.soundPlayed) {                    
+                //     this.button = 'next';
+                //     if(this.hover) {
+                //         image(imgNextH, width/2, height/2+60, width/20,width/20);
+                //     } else {
+                //         image(imgNext, width/2, height/2+60, width/20,width/20);
+                //     }
+                // } else {                
+                //     image(imgLoading, width/2, height/2+60, 100,100);
+                // }
+                image(imgLoading, width/2, height/2+60, 100,100);
+                if(this.soundPlayed && !voice4.isPlaying()) {
+                    this.stage++;
+                    this.soundPlayed = false;
+                    this.button = "";
                 }
+                
             break;
 
             case 4: //
-                voice4.stop();
                 if(!this.soundPlayed) {                    
                     voice5.play();
                     this.soundPlayed = true;
