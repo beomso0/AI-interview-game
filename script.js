@@ -50,7 +50,7 @@ video.addEventListener('play', () => {
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     // faceapi.draw.drawDetections(canvas, resizedDetections)
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-    if(oper.stage == 2) {
+    if(oper.stage == 1) {
       faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
     }    
     // catchMax();
@@ -62,6 +62,7 @@ video.addEventListener('play', () => {
       nowValues = [];
     }
     camLoaded = true;
+    catchMax();
   }, 100)
 })
 
@@ -79,6 +80,4 @@ function catchMax() {
   } catch(e) {
     maxEmotion = 'unknown';
   }  
-  
-  return([str(maxEmotion),maxValue]);
 }

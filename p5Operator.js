@@ -7,6 +7,7 @@ class p5Operator {
         this.released = false;
         this.hover = false;
         this.soundPlayed = false;
+        this.hoverWhich = "";
     }
 
     operation() {
@@ -14,26 +15,49 @@ class p5Operator {
             
             case 0 :       
                 imageMode(CENTER);
-                image(bg1,width/2,height/2, width, height);
+                image(bg0,width/2,height/2, width, height);
                 if(this.hover) {
-                    image(imgFullH, width/2, height*4/5, width/30,width/30);
+                    image(imgFullH, width/2, height*0.67, width/30,width/30);
                 } else {
-                    image(imgFull, width/2, height*4/5, width/30,width/30);
+                    image(imgFull, width/2, height*0.67, width/30,width/30);
                 }
-                // this.loaded++;                
-                
-                if(this.loaded>= 40) {
-                    this.stage++;
-                }                
             break;
 
-            case 1 : 
-                if(!this.soundPlayed) {                                     
+            case 1: //
+                if(!this.soundPlayed) {                    
+                    voice1.play();
+                    this.soundPlayed = true;
+                }
+                image(bg1,width/2,height/2, width, height);
+                if(!this.camOn) {
+                    startVideo();
+                    video.style.cssText = "display:block; top:60%; left:50%; transform:translate(-50%,-50%)"
+                    canvas.style.cssText= "display:block; top:60%; left:50%; transform:translate(-50%,-50%)"
+                    this.camOn = !this.camOn;
+                }
+                if(!camLoaded) {
+                    image(imgTesting, width/2, height*0.88, width/20, width/20);
+                }                 
+                if(!voice1.isPlaying() && camLoaded && this.soundPlayed) {
+                    this.button = 'camOkay';
+                    if(this.hover) {
+                        image(imgNextH, width*12/13, height*12/13, width/20,width/20);
+                    } else {
+                        image(imgNext, width*12/13, height*12/13, width/20,width/20);
+                    } 
+                } 
+            break;
+
+            case 2: //
+                voice1.stop();
+                if(!this.soundPlayed) {                    
                     voice2.play();
                     this.soundPlayed = true;
                 }
-                 
-                image(bg2,width/2,height/2, width, height);     
+                image(bg2,width/2,height/2, width, height);  
+                
+                video.style.cssText = "display:none;"
+                canvas.style.cssText= "display:none;"
 
                 if(!voice2.isPlaying() && this.soundPlayed) {                    
                     this.button = 'next';
@@ -45,90 +69,23 @@ class p5Operator {
                 } else {                
                     image(imgLoading, width/2, height/2+60, 100,100);
                 }
-                
             break;
 
-            case 2: //
+            case 3:
                 voice2.stop();
                 if(!this.soundPlayed) {                    
-                    voice3.play();
+                    voiceMain.play();
                     this.soundPlayed = true;
                 }
-                image(bg3,width/2,height/2, width, height);
-                if(!this.camOn) {
-                    startVideo();
-                    video.style.cssText = "display:block; top:60%; left:50%; transform:translate(-50%,-50%)"
-                    canvas.style.cssText= "display:block; top:60%; left:50%; transform:translate(-50%,-50%)"
-                    this.camOn = !this.camOn;
-                }                 
-                if(!voice3.isPlaying() && camLoaded && this.soundPlayed) {
-                    this.button = 'camOkay';
+                image(bg3,width/2,height/2, width, height);           
+                if(!playing && !voiceMain.isPlaying() && this.soundPlayed) {                    
+                    this.button = 'play';
                     if(this.hover) {
-                        image(imgNextH, width*12/13, height*12/13, width/20,width/20);
+                        image(imgNextH, (width-video.width)/2, height*0.9, width/33,width/33);
                     } else {
-                        image(imgNext, width*12/13, height*12/13, width/20,width/20);
-                    } 
-                }      
-            break;
-
-            case 3: //
-                voice3.stop();
-                if(!this.soundPlayed) {                    
-                    voice4.play();
-                    this.soundPlayed = true;
-                }
-                video.style.cssText = "display:none;"
-                canvas.style.cssText= "display:none;"
-                image(bg4,width/2,height/2, width, height);      
-                
-                // if(!voice4.isPlaying() && this.soundPlayed) {                    
-                //     this.button = 'next';
-                //     if(this.hover) {
-                //         image(imgNextH, width/2, height/2+60, width/20,width/20);
-                //     } else {
-                //         image(imgNext, width/2, height/2+60, width/20,width/20);
-                //     }
-                // } else {                
-                //     image(imgLoading, width/2, height/2+60, 100,100);
-                // }
-                image(imgLoading, width/2, height/2+60, 100,100);
-                if(this.soundPlayed && !voice4.isPlaying()) {
-                    this.stage++;
-                    this.soundPlayed = false;
-                    this.button = "";
-                }
-                
-            break;
-
-            case 4: //
-                if(!this.soundPlayed) {                    
-                    voice5.play();
-                    this.soundPlayed = true;
-                }
-                image(bg5,width/2,height/2, width, height);         
-
-                if(!voice5.isPlaying() && this.soundPlayed) {                    
-                    this.button = 'next';
-                    if(this.hover) {
-                        image(imgNextH, width/2, height/2+60, width/20,width/20);
-                    } else {
-                        image(imgNext, width/2, height/2+60, width/20,width/20);
+                        image(imgNext, (width-video.width)/2, height*0.9, width/33,width/33);
                     }
-                } else {                
-                    image(imgLoading, width/2, height/2+60, 100,100);
-                }
-            break;
-
-            case 5:
-                voice5.stop();
-                this.button = 'play';
-                image(bg6,width/2,height/2, width, height);           
-                if(!playing)                 
-                if(this.hover) {
-                    image(imgNextH, (width-video.width)/2, height*14/15, width/33,width/33);
-                } else {
-                    image(imgNext, (width-video.width)/2, height*14/15, width/33,width/33);
-                }
+                }                 
                 video.style.cssText = "display:block; top:-5px; right:0%; "
                 canvas.style.cssText= "display:block; top:-5px; right:0%; "
                 drawSection();
@@ -151,14 +108,16 @@ class p5Operator {
                 }
             break;
 
-            case 6: //     
+            case 4: //   
+                voiceMain.stop();
                 if(!this.soundPlayed) {                    
-                    voice6.play();
+                    voice3.play();
                     this.soundPlayed = true;
                 }  
                 
-                if(this.soundPlayed && !voice6.isPlaying()) {
+                if(this.soundPlayed && !voice3.isPlaying()) {
                     this.stage++;
+                    this.soundPlayed = false;
                 }
 
                 stopVideo();
@@ -166,9 +125,8 @@ class p5Operator {
                 videotest.hide();
                 video.style.cssText = "display:none";
                 canvas.style.cssText = "display:none";
-                image(bg7,width/2,height/2, width, height);
-                image(imgLoading, width/2, height/2+60, 100,100);
-                
+                image(bg4,width/2,height/2, width, height);
+                image(imgLoading, width/2, height/2+60, 100,100);                
 
                 if(tester.finalResult == "") {
                     tester.makeScore();
@@ -177,13 +135,49 @@ class p5Operator {
 
                 if(!pageLoaded) {
                     finalPage = loadImage("./assets/resultPages/" + tester.finalResult +".png");
+                    urlForImg = 'https://shsh.live/assets/resultPages/' + tester.finalResult + '.png';
+                    kakaoM['content']['imageUrl'] = urlForImg;
                     pageLoaded = !pageLoaded;
                 }              
             break;
 
-            case 7:
-                this.button = 'refresh';
+            case 5:
+                frameRate(60);
+                voice3.stop();
+                if(!this.soundPlayed) {                    
+                    voice4.play();
+                    this.soundPlayed = true;
+                } 
+                this.button = 'final';
                 image(finalPage,width/2,height/2, width, height);
+                
+                let size = 45                
+                
+                switch(this.hoverWhich) {                    
+                    case 'share' :
+                        image(imgShareH, width*0.88, height*0.95, width/size,width/size);
+                        image(imgDown, width*0.91, height*0.95, width/size,width/size);
+                        image(imgRef, width*0.94,height*0.95, width/size,width/size);
+                    break;
+
+                    case 'down':
+                        image(imgShare, width*0.88, height*0.95, width/size,width/size);
+                        image(imgDownH, width*0.91, height*0.95, width/size,width/size);
+                        image(imgRef, width*0.94,height*0.95, width/size,width/size);
+                    break;
+
+                    case 'refresh':
+                        image(imgRefH, width*0.94,height*0.95, width/size,width/size);
+                        image(imgShare, width*0.88, height*0.95, width/size,width/size);
+                        image(imgDown, width*0.91, height*0.95, width/size,width/size);
+                    break;
+
+                    default:
+                        image(imgShare, width*0.88, height*0.95, width/size,width/size);
+                        image(imgDown, width*0.91, height*0.95, width/size,width/size);
+                        image(imgRef, width*0.94,height*0.95, width/size,width/size);
+                }
+
             break;
         }
     }
@@ -218,36 +212,45 @@ class p5Operator {
                 if (this.hover == true && camLoaded) {
                     videotest.play();
                     playing = true;
-                    this.button = "";                    
-                    this.soundPlayed = false;
-                    this.button = "";
+                    this.button = "";    
                 }
             break;
 
-            case 'refresh':
+            case 'final':
                 if (this.hover == true) {
-                    window.location.reload();
+                    switch (this.hoverWhich) {
+                        case 'share' :
+                            Kakao.Link.sendDefault(kakaoM);
+                        break;
+
+                        case 'down':
+                            finalPage.save('result', 'jpg');
+                        break;
+
+                        case 'refresh':
+                            window.location.reload();
+                        break;
+                    }
                 }
             break;
         }       
     }
 
     checkHover() {
-        let bts = ['camOkay', 'refresh'];
-        if(bts.includes(this.button)) {
+        if(this.button == "camOkay") {
             if(dist(mouseX, mouseY, width*12/13, height*12/13) < width/40) {
                 this.hover = true;
             } else {
                 this.hover = false;
             }
         } else if(this.button == 'play') {
-            if(dist(mouseX, mouseY, (width-video.width)/2, height*12/13) < width/66) {
+            if(dist(mouseX, mouseY, (width-video.width)/2, height*0.9) < width/66) {
                 this.hover = true;
             } else {
                 this.hover = false;
             }
         } else if(this.button == 'start') {
-            if(dist(mouseX, mouseY, width/2, height*4/5) < width/60) {
+            if(dist(mouseX, mouseY, width/2, height*0.67) < width/60) {
                 this.hover = true;
             } else {
                 this.hover = false;
@@ -258,6 +261,20 @@ class p5Operator {
             } else {
                 this.hover = false;
             }
+        } else if(this.button == "final") {     
+            if (dist(mouseX, mouseY,width*0.88, height*0.95) < width/90) {
+                this.hoverWhich = 'share';
+                this.hover = true;
+            } else if (dist(mouseX, mouseY,width*0.91, height*0.95) < width/90) {
+                this.hoverWhich = 'down';
+                this.hover = true;
+            } else if (dist(mouseX, mouseY,width*0.94, height*0.95) < width/90) {
+                this.hoverWhich = 'refresh';
+                this.hover = true;
+            } else {                
+                this.hover = false;
+                this.hoverWhich = '';
+            }
         }
     }
 }
@@ -265,7 +282,7 @@ class p5Operator {
 function keyPressed() {
     if(key == 'n') {
         oper.stage++; 
-        this.soundPlayed = false;
+        oper.soundPlayed = false;
     }    
     if(key == 'f') oper.released = true;
 }

@@ -3,17 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
-    <title>Impression Management Simulation</title>
+    <title>Impression Management Test</title>
     <link rel="icon" href="./assets/webicon.png">
     <link rel="stylesheet" type="text/css" href="./style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/addons/p5.sound.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/addons/p5.sound.js"></script>    
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script defer src="face-api.min.js"></script>
     <script src="https://gmousse.github.io/dataframe-js/dist/dataframe.min.js"></script>
     <script defer src="script.js"></script>
     <script defer src="mainTest.js"></script>
-    <script defer src="p5Operator.js"></script>
+    <script defer src="p5Operator.js"></script>    
+    <script defer src="kakaoInit.js"></script>
     <!-- <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script> -->
     <!-- <script src="https://kr.object.ncloudstorage.com/im-video/ncplayer-1.0.0.umd.min-c04c4a15.js"></script> -->
   </head>
@@ -26,7 +28,6 @@
     <!-- <div id ="main_video" style="position: absolute; pointer-events: none;"></div> -->
     <video class = "ai" id="video" autoplay style="position: absolute; pointer-events: none;"></video>
     <canvas class = "ai" id = "drawing" style="position: absolute; pointer-events: none;"></canvas>   
-    
   </body>
 
 </html>

@@ -39,6 +39,8 @@ function drawChart() {
             rect(78, 165+(i*sero/emotions.length), (garo-80) * nowScore/100 ,10);
             text(nowExp, 15, 175+(i*sero/emotions.length));
         }
+
+        image(eval("img"+maxEmotion), areaW/2, areaH*0.13, areaW/10, areaW/10);
     } else if(camLoaded) {
         fill(0);
         textSize(15);
@@ -46,15 +48,28 @@ function drawChart() {
         text("얼굴을 인식할 수 없습니다", areaW/2, areaH/2+70);
     } 
 
-    if(playing && tester.nowTest) {
-        fill(0);
-        textAlign(CENTER);
-        textSize(15)
-        text("표정을 테스트하고 있습니다", (areaW/4)+20, areaH/6);
-        image(imgTesting, areaW*3/4, (areaH/6)-5, width/20,width/20);
-    }
-    
+    // if(playing && tester.nowTest) {
+    //     fill(0);
+    //     textAlign(CENTER);
+    //     textSize(15)
+    //     text("표정을 테스트하고 있습니다", (areaW/4)+20, areaH/6);
+    //     image(imgTesting, areaW*3/4, (areaH/6)-5, width/20,width/20);
+    // }   
     pop();
+
+    if(playing) {
+        strokeWeight(10);
+        strokeCap(ROUND);
+        stroke(212, 212, 212); 
+        let fullLen = width*0.64
+        line(width*0.05, height*0.87, (width*0.05) + fullLen, height*0.87);
+
+        stroke(0);
+        let nowPoint = videotest.time() / videotest.duration();
+        if(videotest.time() >= 0) {
+            line(width*0.05, height*0.87, (width*0.05) + (fullLen*nowPoint) ,height*0.87);
+        }
+    }
 }
 
 function drawBar() {
