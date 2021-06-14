@@ -4,7 +4,7 @@ class p5Operator {
         this.camOn = false;
         this.loaded = 0;
         this.button = 'start';
-        this.released = false;
+        this.released = true;
         this.hover = false;
         this.soundPlayed = false;
         this.hoverWhich = "";
@@ -152,30 +152,30 @@ class p5Operator {
                 image(finalPage,width/2,height/2, width, height);
                 
                 let size = 45                
-                
-                switch(this.hoverWhich) {                    
+                let butHeight = 0.1
+                switch(this.hoverWhich) {                                        
                     case 'share' :
-                        image(imgShareH, width*0.88, height*0.95, width/size,width/size);
-                        image(imgDown, width*0.91, height*0.95, width/size,width/size);
-                        image(imgRef, width*0.94,height*0.95, width/size,width/size);
+                        image(imgShareH, width*0.88, height*butHeight, width/size,width/size);
+                        image(imgDown, width*0.91, height*butHeight, width/size,width/size);
+                        image(imgRef, width*0.94,height*butHeight, width/size,width/size);
                     break;
 
                     case 'down':
-                        image(imgShare, width*0.88, height*0.95, width/size,width/size);
-                        image(imgDownH, width*0.91, height*0.95, width/size,width/size);
-                        image(imgRef, width*0.94,height*0.95, width/size,width/size);
+                        image(imgShare, width*0.88, height*butHeight, width/size,width/size);
+                        image(imgDownH, width*0.91, height*butHeight, width/size,width/size);
+                        image(imgRef, width*0.94,height*butHeight, width/size,width/size);
                     break;
 
                     case 'refresh':
-                        image(imgRefH, width*0.94,height*0.95, width/size,width/size);
-                        image(imgShare, width*0.88, height*0.95, width/size,width/size);
-                        image(imgDown, width*0.91, height*0.95, width/size,width/size);
+                        image(imgRefH, width*0.94,height*butHeight, width/size,width/size);
+                        image(imgShare, width*0.88, height*butHeight, width/size,width/size);
+                        image(imgDown, width*0.91, height*butHeight, width/size,width/size);
                     break;
 
                     default:
-                        image(imgShare, width*0.88, height*0.95, width/size,width/size);
-                        image(imgDown, width*0.91, height*0.95, width/size,width/size);
-                        image(imgRef, width*0.94,height*0.95, width/size,width/size);
+                        image(imgShare, width*0.88, height*butHeight, width/size,width/size);
+                        image(imgDown, width*0.91, height*butHeight, width/size,width/size);
+                        image(imgRef, width*0.94,height*butHeight, width/size,width/size);
                 }
 
             break;
@@ -237,6 +237,7 @@ class p5Operator {
     }
 
     checkHover() {
+        let butHeight = 0.1
         if(this.button == "camOkay") {
             if(dist(mouseX, mouseY, width*12/13, height*12/13) < width/40) {
                 this.hover = true;
@@ -262,13 +263,13 @@ class p5Operator {
                 this.hover = false;
             }
         } else if(this.button == "final") {     
-            if (dist(mouseX, mouseY,width*0.88, height*0.95) < width/90) {
+            if (dist(mouseX, mouseY,width*0.88, height*butHeight) < width/90) {
                 this.hoverWhich = 'share';
                 this.hover = true;
-            } else if (dist(mouseX, mouseY,width*0.91, height*0.95) < width/90) {
+            } else if (dist(mouseX, mouseY,width*0.91, height*butHeight) < width/90) {
                 this.hoverWhich = 'down';
                 this.hover = true;
-            } else if (dist(mouseX, mouseY,width*0.94, height*0.95) < width/90) {
+            } else if (dist(mouseX, mouseY,width*0.94, height*butHeight) < width/90) {
                 this.hoverWhich = 'refresh';
                 this.hover = true;
             } else {                
